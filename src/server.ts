@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
 import { fstat } from 'fs';
@@ -18,8 +18,8 @@ import { fstat } from 'fs';
   // GET /filteredimage?image_url={{URL}}
   // endpoint to filter an image from a public url.
   // IT SHOULD
-  app.get('/filteredimage/', async (req,res) =>{
-    const { image_url } = req.query;
+  app.get('/filteredimage/', async (req: Request, res: Response) =>{
+    const { image_url }:{image_url:string} = req.query;
      //    1. validate the image_url query
      if(!image_url){
       return res.status(400).send("Invalid image url");
